@@ -27,15 +27,8 @@ jobs:
         find /tmp/WLEDtemp -maxdepth 1 -mindepth 1 -name "*" -type d >> /tmp/WLEDtemp/wledfoldername
         cd `cat /tmp/WLEDtemp/wledfoldername`
         echo '[env:custom_build]' >>platformio.ini
-        echo 'extends = env:esp32s2_PSRAM_M' >>platformio.ini
-        echo 'build_flags = ${env:esp32s2_PSRAM_M.build_flags} ${common.debug_flags} -D SR_DEBUG -D MIC_LOGGER -D LEDPIN=16 -D WLED_MAX_USERMODS=6 -D USERMOD_DALLASTEMPERATURE -D USERMOD_AUTO_SAVE -D USERMOD_BATTERY -D USERMOD_SENSORSTOMQTT -D USERMOD_RTC -D USERMOD_SN_PHOTORESISTOR' >>platformio.ini
-        echo 'lib_deps = ' >>platformio.ini
-        echo '  ${env:esp32s2_PSRAM_M.lib_deps}' >>platformio.ini
-        echo '  OneWire@~2.3.5' >>platformio.ini
-        echo '  adafruit/Adafruit BMP280 Library @ 2.1.0' >>platformio.ini
-        echo '  adafruit/Adafruit CCS811 Library @ 1.0.4' >>platformio.ini
-        echo '  adafruit/Adafruit Si7021 Library @ 1.4.0' >>platformio.ini
-        echo '  adafruit/Adafruit Unified Sensor' >>platformio.ini
+        echo 'extends = env:esp32s2_tinyUF2_PSRAM_S' >>platformio.ini
+        echo 'build_flags = ${env:esp32s2_tinyUF2_PSRAM_S.build_flags} -D LEDPIN=16 -D USERMOD_AUTO_SAVE' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
     - name: Copy Files
